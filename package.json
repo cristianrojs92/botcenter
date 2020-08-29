@@ -1,0 +1,24 @@
+{
+  "name": "botcenter",
+  "version": "1.0.0",
+  "description": "Bot encargado de responder consultas a usuarios",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc src/*.ts --outDir js",
+    "start" : "node js/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristianrojs92/botcenter.git"
+  },
+  "author": "Cristian Rojas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cristianrojs92/botcenter/issues"
+  },
+  "homepage": "https://github.com/cristianrojs92/botcenter#readme",
+  "dependencies": {
+    "tsc": "^1.20150623.0"
+  }
+}
