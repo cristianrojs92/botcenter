@@ -4,9 +4,9 @@
   "description": "Bot encargado de responder consultas a usuarios",
   "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc src/*.ts --outDir js",
-    "start" : "node js/server.js"
+    "compile": "tsc",
+    "start-dev": "nodemon -e ts --ignore js/ --exec \"tsc && DEBUG=true node js/server.js\"",
+    "start": "NODE_ENV=production node js/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,16 @@
   },
   "homepage": "https://github.com/cristianrojs92/botcenter#readme",
   "dependencies": {
-    "tsc": "^1.20150623.0"
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "pg": "^8.3.3",
+    "twilio": "^3.49.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/helmet": "0.0.48",
+    "@types/pg": "^7.14.4",
+    "@types/twilio": "^2.11.0",
+    "typescript": "^4.0.2"
   }
 }

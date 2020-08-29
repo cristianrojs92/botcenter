@@ -1,14 +1,18 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Node 10",
-  
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2018",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }  
+    "target": "es2017",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "js",
+    "baseUrl": "",
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
- 
