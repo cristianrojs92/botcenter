@@ -12,9 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-//import  routes from "./routes";
-//Dependencias
-const db = require("./services/db");
+const routes_1 = require("./routes");
 //Constantes de configuracion
 const config = require("./config");
 /**
@@ -22,8 +20,6 @@ const config = require("./config");
  *
  */
 async function start() {
-    // Inicializa la base de datos
-    await db.start();
     console.log(`server.js: server initialize (devel: ${config.DEV})`);
     //Intanciamos la aplicacion de express
     const app = express();
@@ -32,7 +28,7 @@ async function start() {
     //Se parsea el body a json
     app.use(bodyParser.json());
     //Se agregan las rutas.
-    //routes(app);
+    routes_1.default(app);
     //Inicia el servidor.
     app.listen(config.APP_PORT, () => {
         console.log(`server.js: El servidor esta corriendo en http://localhost:${config.APP_PORT}`);

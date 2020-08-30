@@ -1,0 +1,8 @@
+{
+  "accounts" :  [
+                  {
+                    "accountSid": "AC943e11b35862118e7cddb5eb9ba5cd64",
+                    "template": "example.json"
+                  }
+                ]
+}

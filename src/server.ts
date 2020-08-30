@@ -11,10 +11,7 @@
 import * as express from "express";
 import * as helmet from "helmet";
 import * as bodyParser from "body-parser";
-//import  routes from "./routes";
-
-//Dependencias
-import * as db from "./services/db";
+import  routes from "./routes";
 
 //Constantes de configuracion
 import * as config from "./config";
@@ -24,9 +21,6 @@ import * as config from "./config";
  *
  */
 async function start() {
-
-  // Inicializa la base de datos
-  await db.start();
 
   console.log(`server.js: server initialize (devel: ${config.DEV})`);
 
@@ -40,7 +34,7 @@ async function start() {
   app.use(bodyParser.json());
 
   //Se agregan las rutas.
-  //routes(app);
+  routes(app);
 
   //Inicia el servidor.
   app.listen(config.APP_PORT, () => {
