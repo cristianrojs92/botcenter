@@ -110,3 +110,20 @@ function getTemplates(accountSid: string): Array<template> {
 
   return templates;
 }
+
+export function getMessageOptions(template : template) : string {
+  let options : string;
+  try {
+
+    //Verificamos si el mensaje tine opciones
+    if(template.options && Array.isArray(template.options)) {
+      options = template.options.reduce((message, option) => {
+        return message += option.message + '\n';
+      }, '');
+    }
+    
+  } catch (error) {
+    console.error(`[template.ts][getMessageOptions] Error: ${error}`);
+  }
+  return options;
+}

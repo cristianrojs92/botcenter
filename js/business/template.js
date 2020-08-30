@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTemplateByEvent = void 0;
+exports.getMessageOptions = exports.getTemplateByEvent = void 0;
 /*
  * template.ts
  *
@@ -96,4 +96,20 @@ function getTemplates(accountSid) {
     }
     return templates;
 }
+function getMessageOptions(template) {
+    let options;
+    try {
+        //Verificamos si el mensaje tine opciones
+        if (template.options && Array.isArray(template.options)) {
+            options = template.options.reduce((message, option) => {
+                return message += option.message + '/n';
+            }, '');
+        }
+    }
+    catch (error) {
+        console.error(`[template.ts][getMessageOptions] Error: ${error}`);
+    }
+    return options;
+}
+exports.getMessageOptions = getMessageOptions;
 //# sourceMappingURL=template.js.map

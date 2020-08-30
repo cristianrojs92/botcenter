@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.demoReply = void 0;
 const conversations_1 = require("../services/conversations");
 const template_1 = require("./template");
+const twilio_1 = require("twilio");
 /**
  *
  * @param req Request
@@ -22,6 +23,7 @@ function demoReply(req, res) {
         const incomingMessage = getInvoiceMenssage(req.body);
         //Mensaje de respuesta
         let outgoingMessage;
+        let template;
         if (incomingMessage === undefined) {
             console.log(`[responder.ts] [demoReply] Datos invalidos`);
             return;
@@ -34,9 +36,17 @@ function demoReply(req, res) {
         }
         else {
             //No se encontro conversacion se dispara envento principal
-            const template = template_1.getTemplateByEvent(incomingMessage.accountSid, "MAIN" /* MAIN */);
+            template = template_1.getTemplateByEvent(incomingMessage.accountSid, "MAIN" /* MAIN */);
             //Se obtiene el mensaje del template
-            //const outgoingMessage = processTemplate(template);
+            outgoingMessage = getOutgoingMessage(template);
+        }
+        //Si tenemos mensaje de respuesta
+        if (outgoingMessage) {
+            //Almacenamos la conversacion
+            conversations_1.setConversation(incomingMessage.from, template.id, template.type, Date.now().toString());
+            //Respondemos el mensaje.
+            res.writeHead(200, { 'Content-Type': 'text/xml' });
+            res.end(outgoingMessage);
         }
     }
     catch (error) {
@@ -66,7 +76,7 @@ function getInvoiceMenssage(resquest) {
         */
         if (resquest.Body || resquest.AccountSid || resquest.To || resquest.From) {
             //Verificamos la cantidad de caracteres
-            if (resquest.Body.length <= 500) {
+            if (resquest.Body.length <= 1600) {
                 incomingMessage = {
                     accountSid: resquest.AccountSid,
                     body: resquest.Body,
@@ -83,6 +93,25 @@ function getInvoiceMenssage(resquest) {
     catch (error) {
     }
 }
-function processTemplate(template) {
+/**
+ * Retorna el mensaje de una plantilla
+ * @param template Plantilla
+ */
+function getOutgoingMessage(template) {
+    let outgoingMessage;
+    try {
+        const messagingResponse = new twilio_1.twiml.MessagingResponse();
+        messagingResponse.message(template.message);
+        //Obtenemos las opciones
+        const optionMessage = template_1.getMessageOptions(template);
+        //Si tenemos opciones
+        if (optionMessage) {
+            messagingResponse.message(optionMessage);
+        }
+        outgoingMessage = messagingResponse.toString();
+    }
+    catch (error) {
+    }
+    return outgoingMessage;
 }
 //# sourceMappingURL=responder.js.map

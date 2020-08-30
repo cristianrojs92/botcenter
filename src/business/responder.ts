@@ -9,8 +9,9 @@
 
 //Dependencias
 import { Request, Response } from "express";
-import { getConversation } from "../services/conversations";
-import { getTemplateByEvent } from "./template";
+import { getConversation, setConversation } from "../services/conversations";
+import { getTemplateByEvent, getMessageOptions } from "./template";
+import { twiml } from "twilio";
 
 /**
  * 
@@ -26,7 +27,8 @@ export function demoReply(req: Request, res: Response){
     const incomingMessage = getInvoiceMenssage(req.body);
 
     //Mensaje de respuesta
-    let outgoingMessage;
+    let outgoingMessage: string;
+    let template: template;
 
     if(incomingMessage === undefined) {
       console.log(`[responder.ts] [demoReply] Datos invalidos`);
@@ -44,10 +46,21 @@ export function demoReply(req: Request, res: Response){
     } else {
 
       //No se encontro conversacion se dispara envento principal
-      const template = getTemplateByEvent(incomingMessage.accountSid, templates.templateEvent.MAIN);
+      template = getTemplateByEvent(incomingMessage.accountSid, templates.templateEvent.MAIN);
 
       //Se obtiene el mensaje del template
-      //const outgoingMessage = processTemplate(template);
+      outgoingMessage = getOutgoingMessage(template);
+    }
+
+    //Si tenemos mensaje de respuesta
+    if(outgoingMessage) {
+
+      //Almacenamos la conversacion
+      setConversation(incomingMessage.from, template.id, template.type, Date.now().toString());
+
+      //Respondemos el mensaje.
+      res.writeHead(200, {'Content-Type': 'text/xml'});
+      res.end(outgoingMessage);
     }
 
 
@@ -82,7 +95,7 @@ export function demoReply(req: Request, res: Response){
       if(resquest.Body|| resquest.AccountSid || resquest.To || resquest.From ) {
 
         //Verificamos la cantidad de caracteres
-        if(resquest.Body.length <= 500) {
+        if(resquest.Body.length <= 1600) {
           incomingMessage = {
             accountSid: resquest.AccountSid,
             body: resquest.Body,
@@ -100,6 +113,32 @@ export function demoReply(req: Request, res: Response){
     }
  }
 
- function processTemplate(template: template) {
+ /**
+  * Retorna el mensaje de una plantilla
+  * @param template Plantilla
+  */
+ function getOutgoingMessage(template: template) : string {
 
+  let outgoingMessage : string;
+  try {
+
+    const messagingResponse = new twiml.MessagingResponse();
+
+    messagingResponse.message(template.message);
+
+    //Obtenemos las opciones
+    const optionMessage = getMessageOptions(template);
+
+    //Si tenemos opciones
+    if(optionMessage) {
+      messagingResponse.message(optionMessage);
+    }
+
+    outgoingMessage = messagingResponse.toString();
+
+    
+  } catch (error) {
+    
+  }
+  return outgoingMessage;
  }
