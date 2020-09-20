@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMessageOptions = exports.getTemplateByEvent = void 0;
+exports.getMessageOptions = exports.getTemplateByIncomingMessage = exports.getTemplateByEvent = void 0;
 /*
  * template.ts
  *
@@ -42,6 +42,61 @@ function getTemplateByEvent(accountSid, event) {
 }
 exports.getTemplateByEvent = getTemplateByEvent;
 /**
+ * Devuelve una plantilla segun la conversacion
+ * @param accountSid Cuenta
+ * @param event Evento
+ */
+function getTemplateByIncomingMessage(accountSid, message, template_id) {
+    let new_template;
+    try {
+        //Id del nuevo template
+        let new_template_id;
+        //Buscamos la lista de las plantillas
+        const templates = getTemplates(accountSid);
+        //Buscamos la plantilla por su id
+        const template = searchTemplateById(template_id, templates);
+        //Verificamos si el template tiene opciones
+        if (template.options !== undefined && Array.isArray(template.options) && template.options.length > 0) {
+            //Buscamos la opcion que implementa ese mensaje
+            if (message) {
+                //Buscamos la opcion
+                const option = template.options.find((o) => o.value.toUpperCase() === message.trim().toLocaleUpperCase());
+                //Si se encontro una opcion se utiliza el template definido si no se encontro una opcion se utiliza template por default
+                new_template_id = (option && option.templateId !== undefined) ? option.templateId : template.templateDefault.templateId;
+            }
+        }
+        //Si se encontro un template id
+        if (new_template_id) {
+            //Buscamos el nuevo template
+            new_template = searchTemplateById(new_template_id, templates);
+        }
+        if (!new_template) {
+            console.error(`[template.ts] [getTemplateEvent] Template nulo`);
+        }
+    }
+    catch (error) {
+        console.error(`[template.ts] [getTemplateEvent] ${error}`);
+    }
+    return new_template;
+}
+exports.getTemplateByIncomingMessage = getTemplateByIncomingMessage;
+/**
+ * Retorno una plantilla segun su ID
+ * @param event Evento
+ * @param templates Listado de plantillas
+ */
+function searchTemplateById(template_id, templates) {
+    let template;
+    try {
+        //Realizamos la busqueda de la plantilla segun el evento
+        template = templates.find((t) => t.id === template_id);
+    }
+    catch (error) {
+        console.error(`[template.ts][searchTemplateById] Error: ${error}`);
+    }
+    return template;
+}
+/**
  * Retorno una plantilla dependiendo el tipo de evento
  * @param event Evento
  * @param templates Listado de plantillas
@@ -75,9 +130,12 @@ function getTemplates(accountSid) {
                 //Obtenemos el nombre del archivo de template
                 const nameTemplateFile = botAcoount.template;
                 if (nameTemplateFile) {
-                    //Realizamos la lectura del template
-                    const templatesFile = JSON.parse((fs.readFileSync(path.join(_BASEDIR_, `${PATH_TEMPLATES}/${nameTemplateFile}`)).toString()));
-                    templates = templatesFile.templates;
+                    const templatesFileJson = fs.readFileSync(path.join(_BASEDIR_, `${PATH_TEMPLATES}/${nameTemplateFile}`));
+                    if (templatesFileJson) {
+                        //Realizamos la lectura del template
+                        const templatesFile = JSON.parse(templatesFileJson.toString());
+                        templates = templatesFile.templates;
+                    }
                 }
                 else {
                     console.error(`[template.ts][getTemplateConfig] Nombre del archivo del template vacio`);
@@ -102,7 +160,9 @@ function getMessageOptions(template) {
         //Verificamos si el mensaje tine opciones
         if (template.options && Array.isArray(template.options)) {
             options = template.options.reduce((message, option) => {
-                return message += option.message + '/n';
+                if (option.message) {
+                    return message += option.message + '\n';
+                }
             }, '');
         }
     }

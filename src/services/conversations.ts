@@ -19,16 +19,20 @@ const _BASEDIR_ = path.join(path.dirname(__filename), '.');
  * Esta funcion devuelve todas las conversaciones realizadas.
  */
 function getConversations() : Array<conversation> {
+  let conversations = [];
   try {
 
-    //Obtenemos las conversaciones almacenadas
-    const conversations = JSON.parse((fs.readFileSync(path.join(_BASEDIR_, CONVERSATIONS_FILES)).toString()));
-    return conversations;
+    const conversationsJson = fs.readFileSync(path.join(_BASEDIR_, CONVERSATIONS_FILES));
+    if(conversationsJson) {
+
+      //Obtenemos las conversaciones almacenadas
+      conversations = JSON.parse((conversationsJson.toString()));
+    }
 
   } catch (error) {
     console.error(error);
-    return [];
   }
+  return conversations;
 
 }
 
@@ -72,7 +76,9 @@ export function setConversation( from: string, template_id: string, template_typ
       conversations = conversations.map( (c) => {
         if(c.from === conversation.from) {
           return { ...c,
-                   template_type
+                   template_type,
+                   template_id,
+                   date
                  };
         } 
         return c;

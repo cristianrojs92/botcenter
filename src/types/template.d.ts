@@ -1,7 +1,8 @@
 declare namespace templates {
 
   export const enum templateEvent  {
-    MAIN = "MAIN"
+    MAIN = "MAIN",
+    RANDOM = "RANDOM"
   }
   
   export const  enum templateType {

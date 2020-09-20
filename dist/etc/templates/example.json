@@ -43,6 +43,7 @@
     {
       "id": "DEFAULTMENUPRINCIPAL",
       "name": "Default del menu principal",
+      "event": "RANDOM",
       "type": "MENU",
       "message": "Te puedo ayudar con una variedad de temas:",
       "options" : [
