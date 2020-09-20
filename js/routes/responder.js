@@ -18,8 +18,12 @@ function getRouter() {
     //Importamos el enrutador
     const router = express_1.Router();
     //Webhook donde llegaran los mensaje de twilio
-    const nameRoute = '/demo-reply';
+    let nameRoute = '/demo-reply';
     router.post(nameRoute, responder_1.demoReply);
+    console.log(`Se agrega ruta: ${nameRoute}`);
+    //Webhook donde llegaran los mensaje de twilio
+    nameRoute = '/wsWebResponder';
+    router.post(nameRoute, responder_1.wsWebResponder);
     console.log(`Se agrega ruta: ${nameRoute}`);
     return router;
 }

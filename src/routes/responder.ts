@@ -8,7 +8,7 @@
  */
 
 import { Router } from "express";
-import { demoReply } from "../business/responder";
+import { demoReply, wsWebResponder } from "../business/responder";
 
 /**
  * Devuelve todas las rutas de este recurso
@@ -20,8 +20,13 @@ export function getRouter() : Router {
   const router: Router = Router();
 
   //Webhook donde llegaran los mensaje de twilio
-  const nameRoute = '/demo-reply';
+  let nameRoute = '/demo-reply';
   router.post(nameRoute, demoReply);
+  console.log(`Se agrega ruta: ${nameRoute}`)
+
+  //Webhook donde llegaran los mensaje de twilio
+  nameRoute = '/wsWebResponder';
+  router.post(nameRoute, wsWebResponder);
   console.log(`Se agrega ruta: ${nameRoute}`)
 
   return router;

@@ -1,6 +1,6 @@
 "use strict";
 /*
- * responder.ts
+ * messages.ts
  *
  * Created on 20 de Septiembre de 2020
  * Copyright © 2020
@@ -16,7 +16,7 @@ const template_1 = require("./template");
 /**
  *
  */
-function processIncomingMessage(incomingMessage) {
+function processIncomingMessage(incomingMessage, type) {
     let outgoingMessage;
     try {
         let template;
@@ -37,7 +37,7 @@ function processIncomingMessage(incomingMessage) {
             template = template_1.getTemplateByEvent(incomingMessage.accountSid, "RANDOM" /* RANDOM */);
         }
         //Se obtiene el mensaje del template
-        outgoingMessage = getOutgoingMessage(template);
+        outgoingMessage = getOutgoingMessage(template, type);
         if (outgoingMessage) {
             //Almacenamos la conversacion
             conversations_1.setConversation(incomingMessage.from, template.id, template.type, Date.now().toString());
@@ -92,18 +92,31 @@ exports.getInvoiceMenssage = getInvoiceMenssage;
 * Retorna el mensaje de una plantilla
 * @param template Plantilla
 */
-function getOutgoingMessage(template) {
+function getOutgoingMessage(template, type) {
     let outgoingMessage;
     try {
-        const messagingResponse = new twilio_1.twiml.MessagingResponse();
-        messagingResponse.message(template.message);
         //Obtenemos las opciones
         const optionMessage = template_1.getMessageOptions(template);
-        //Si tenemos opciones
-        if (optionMessage) {
-            messagingResponse.message(optionMessage);
+        switch (type) {
+            case "JSON" /* JSON */:
+                let messagesResponse = [];
+                messagesResponse.push(template.message);
+                //Si tenemos opciones
+                if (optionMessage) {
+                    messagesResponse.push(optionMessage);
+                }
+                outgoingMessage = JSON.stringify(messagesResponse);
+                break;
+            case "XML" /* XML */:
+                const messagingResponse = new twilio_1.twiml.MessagingResponse();
+                messagingResponse.message(template.message);
+                //Si tenemos opciones
+                if (optionMessage) {
+                    messagingResponse.message(optionMessage);
+                }
+                outgoingMessage = messagingResponse.toString();
+                break;
         }
-        outgoingMessage = messagingResponse.toString();
     }
     catch (error) {
     }

@@ -5,40 +5,15 @@
       "name": "Menu principal",
       "event": "MAIN",
       "type": "MENU",
-      "message": "!Bienvenido! Te puedo ayudar con una variedad de temas:",
+      "message": "Hola, soy Ezequiel Romero. Estoy para hacerte más fácil algunas consultas sobre los distintos programas del estado nacional :",
       "options" : [
-        { "value": "1", "message": "1-Consultas cobro IFE", "templateId": "CONSULTAIFE"},
-        { "value": "2", "message": "2-Consoltas cobro Jubilaciones", "templateId": "NODISPONIBLE"},
-        { "value": "3", "message": "3-Consultas cobro Pensiones", "templateId": "NODISPONIBLE"}
+        { "value": "1", "message": "1. Fechas de Cobro.", "templateId": "FECHAS_DE_COBRO"},
+        { "value": "2", "message": "2. Consultas. (En construcción).", "templateId": "NODISPONIBLE"},
+        { "value": "3", "message": "3. Tramites. (En construcción).", "templateId": "NODISPONIBLE"}
       ],
       "templateDefault" : {
         "templateId": "DEFAULTMENUPRINCIPAL"
       }
-    },
-    {
-      "id":"CONSULTAIFE",
-      "type": "MENU",
-      "message": "Ingrese un numero de 0 al 9",
-      "options" : [
-        { "value": "0", "templateId": "IMAGENIFE0"},
-        { "value": "1", "templateId": "IMAGENIFE1"},
-        { "value": "2", "templateId": "IMAGENIFE2"},
-        { "value": "3", "templateId": "IMAGENIFE3"},
-        { "value": "4", "templateId": "IMAGENIFE4"},
-        { "value": "5", "templateId": "IMAGENIFE5"},
-        { "value": "6", "templateId": "IMAGENIFE6"},
-        { "value": "7", "templateId": "IMAGENIFE7"},
-        { "value": "8", "templateId": "IMAGENIFE8"},
-        { "value": "9", "templateId": "IMAGENIFE9"}
-      ],
-      "templateDefault" : {
-        "templateId": 1
-      }
-    },
-    {
-      "id":"NODISPONIBLE",
-      "type": "INFO",
-      "message": "!Disculpe! Por el momento esta opcion no esta soportada"
     },
     {
       "id": "DEFAULTMENUPRINCIPAL",
@@ -47,77 +22,554 @@
       "type": "MENU",
       "message": "Te puedo ayudar con una variedad de temas:",
       "options" : [
-        { "value": "1", "message": "1-Consultas cobro IFE", "templateId": "CONSULTAIFE"},
-        { "value": "2", "message": "2-Consoltas cobro Jubilaciones", "templateId": "NODISPONIBLE"},
-        { "value": "3", "message": "3-Consultas cobro Pensiones", "templateId": "NODISPONIBLE"},
-        { "value": "4", "message": "4-Comunicarse con un representante", "templateId": "REPRESENTANTE"}
+        { "value": "1", "message": "1. Fechas de Cobro.", "templateId": "FECHAS_DE_COBRO"},
+        { "value": "2", "message": "2. Consultas. (En construcción).", "templateId": "NODISPONIBLE"},
+        { "value": "3", "message": "3. Tramites. (En construcción).", "templateId": "NODISPONIBLE"}
       ],
       "templateDefault" : {
         "templateId": "DEFAULTMENUPRINCIPAL"
       }
     },
     {
-      "id":"IMAGENIFE0",
-      "type": "INFO",
-      "media": "ife0.png"
-    },
-    {
-      "id":"IMAGENIFE1",
-      "type": "INFO",
-      "media": "ife1.png"
-    },
-    {
-      "id":"IMAGENIFE2",
-      "type": "INFO",
-      "media": "ife2.png"
-    },
-    {
-      "id":"IMAGENIFE3",
-      "type": "INFO",
-      "media": "ife3.png"
-    },
-    {
-      "id":"IMAGENIFE4",
-      "type": "INFO",
-      "media": "ife4.png"
-    },
-    {
-      "id":"IMAGENIFE5",
-      "type": "INFO",
-      "media": "ife5.png"
-    },
-    {
-      "id":"IMAGENIFE6",
-      "type": "INFO",
-      "media": "ife6.png"
-    },
-    {
-      "id":"IMAGENIFE7",
-      "type": "INFO",
-      "media": "ife7.png"
-    },
-    {
-      "id":"IMAGENIFE8",
-      "type": "INFO",
-      "media": "ife8.png"
-    },
-    {
-      "id":"IMAGENIFE9",
-      "type": "INFO",
-      "media": "ife9.png"
-    },
-    {
-      "id":"REPRESENTANTE",
-      "type": "SUPPORT",
-      "message": "Por favor ingrese el motivo de la consulta y en breve lo llamaremos",
+      "id":"FECHAS_DE_COBRO",
+      "type": "MENU",
+      "message": "Porfavor ingrese que consulta de cobro decea relizar:",
+      "options" : [
+        { "value": "1", "message": "1. Asignación familiar y por hijo (AUH)", "templateId": "AUH"},
+        { "value": "2", "message": "2. Asignación por embarazo.", "templateId": "APE"},
+        { "value": "3", "message": "3. Asignación por Maternidad y Prenatal.", "templateId": "APM"},
+        { "value": "4", "message": "4. Pago Único: Matrimonio, adopción y nacimiento.",  "templateId": "PU"},
+        { "value": "5", "message": "5. Pensiones NO Contributivas (PNC).", "templateId": "PNC"},
+        { "value": "6", "message": "6. Asignación Familiares de PNC.", "templateId": "APNC"},
+        { "value": "7", "message": "7. Desempleo.", "templateId": "DESEMPLEO"},
+        { "value": "8", "message": "8. Jubilaciones y pensiones.", "templateId": "JUBILACIONES_PENSIONES"},
+        { "value": "9", "message": "9. Ingreso Familiar de Emergencia (IFE).", "templateId": "IFE"}
+      ],
       "templateDefault" : {
-        "templateId": "REPRESENTANTEFIN"
+        "templateId": "DEFAULTMENUPRINCIPAL"
       }
     },
     {
-      "id":"REPRESENTANTEFIN",
+      "id":"AUH",
+      "type": "MENU",
+      "message": "Asignación familiar y por hijo (AUH)",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0.", "templateId": "AUH_DNI_0"},
+        { "value": "B", "message": "B. DNI Terminado en 1", "templateId": "AUH_DNI_1"},
+        { "value": "C", "message": "C. DNI Terminado en 2.", "templateId": "AUH_DNI_2"},
+        { "value": "D", "message": "D. DNI Terminado en 3.",  "templateId": "AUH_DNI_3"},
+        { "value": "E", "message": "F. DNI Terminado en 4.", "templateId": "AUH_DNI_4"},
+        { "value": "F", "message": "G. DNI Terminado en 5.", "templateId": "AUH_DNI_5"},
+        { "value": "G", "message": "H. DNI Terminado en 6.", "templateId": "AUH_DNI_6"},
+        { "value": "H", "message": "I. DNI Terminado en 7.", "templateId": "AUH_DNI_7"},
+        { "value": "I", "message": "J. DNI Terminado en 8.", "templateId": "AUH_DNI_8"},
+        { "value": "J", "message": "K. DNI Terminado en 9.", "templateId": "AUH_DNI_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"NODISPONIBLE",
       "type": "INFO",
-      "message": "Gracias por comunicarse en breve lo contactaremos!"
+      "message": "!Disculpe! Estamos trabajando en la construccion de esta seccion"
+    },
+    {
+      "id":"AUH_DNI_0",
+      "type": "INFO",
+      "message": "AUH_DNI_0"
+    },
+    {
+      "id":"AUH_DNI_1",
+      "type": "INFO",
+      "message": "AUH_DNI_1"
+    },
+    {
+      "id":"AUH_DNI_2",
+      "type": "INFO",
+      "message": "AUH_DNI_2"
+    },
+    {
+      "id":"AUH_DNI_3",
+      "type": "INFO",
+      "message": "AUH_DNI_3"
+    },
+    {
+      "id":"AUH_DNI_4",
+      "type": "INFO",
+      "message": "AUH_DNI_4"
+    },
+    {
+      "id":"AUH_DNI_5",
+      "type": "INFO",
+      "message": "AUH_DNI_5"
+    },    {
+      "id":"AUH_DNI_6",
+      "type": "INFO",
+      "message": "AUH_DNI_6"
+    },    {
+      "id":"AUH_DNI_7",
+      "type": "INFO",
+      "message": "AUH_DNI_7"
+    },    {
+      "id":"AUH_DNI_8",
+      "type": "INFO",
+      "message": "AUH_DNI_8"
+    },    {
+      "id":"AUH_DNI_9",
+      "type": "INFO",
+      "message": "AUH_DNI_9"
+    },
+    {
+      "id":"APE",
+      "type": "MENU",
+      "message": "Asignación por embarazo.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0.", "templateId": "APE_DNI_0"},
+        { "value": "B", "message": "B. DNI Terminado en 1", "templateId": "APE_DNI_1"},
+        { "value": "C", "message": "C. DNI Terminado en 2.", "templateId": "APE_DNI_2"},
+        { "value": "D", "message": "D. DNI Terminado en 3.",  "templateId": "APE_DNI_3"},
+        { "value": "E", "message": "F. DNI Terminado en 4.", "templateId": "APE_DNI_4"},
+        { "value": "F", "message": "G. DNI Terminado en 5.", "templateId": "APE_DNI_5"},
+        { "value": "G", "message": "H. DNI Terminado en 6.", "templateId": "APE_DNI_6"},
+        { "value": "H", "message": "I. DNI Terminado en 7.", "templateId": "APE_DNI_7"},
+        { "value": "I", "message": "J. DNI Terminado en 8.", "templateId": "APE_DNI_8"},
+        { "value": "J", "message": "K. DNI Terminado en 9.", "templateId": "APE_DNI_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"APE_DNI_0",
+      "type": "INFO",
+      "message": "APE_DNI_0"
+    },
+    {
+      "id":"APE_DNI_1",
+      "type": "INFO",
+      "message": "APE_DNI_1"
+    },
+    {
+      "id":"APE_DNI_2",
+      "type": "INFO",
+      "message": "APE_DNI_2"
+    },
+    {
+      "id":"APE_DNI_3",
+      "type": "INFO",
+      "message": "APE_DNI_3"
+    },
+    {
+      "id":"APE_DNI_4",
+      "type": "INFO",
+      "message": "APE_DNI_4"
+    },
+    {
+      "id":"APE_DNI_5",
+      "type": "INFO",
+      "message": "APE_DNI_5"
+    },    {
+      "id":"APE_DNI_6",
+      "type": "INFO",
+      "message": "APE_DNI_6"
+    },    {
+      "id":"APE_DNI_7",
+      "type": "INFO",
+      "message": "APE_DNI_7"
+    },    {
+      "id":"APE_DNI_8",
+      "type": "INFO",
+      "message": "APE_DNI_8"
+    }, 
+    {
+      "id":"APE_DNI_9",
+      "type": "INFO",
+      "message": "APE_DNI_9"
+    },
+    {
+      "id":"APM",
+      "type": "MENU",
+      "message": "Asignación por Maternidad y Prenatal.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0 y 1.", "templateId": "APM_DNI_0_1"},
+        { "value": "B", "message": "B. DNI Terminado en 2 y 3", "templateId": "APM_DNI_2_3"},
+        { "value": "C", "message": "C. DNI Terminado en 4 y 5.", "templateId": "APM_DNI_4_5"},
+        { "value": "D", "message": "D. DNI Terminado en 6 y 7.",  "templateId": "APM_DNI_6_7"},
+        { "value": "E", "message": "E. DNI Terminado en 8 y 9.", "templateId": "APM_DNI_8_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"APM_DNI_0_1",
+      "type": "INFO",
+      "message": "APM_DNI_0_1"
+    },
+    {
+      "id":"APM_DNI_2_3",
+      "type": "INFO",
+      "message": "APM_DNI_2_3"
+    },
+    {
+      "id":"APM_DNI_4_5",
+      "type": "INFO",
+      "message": "APM_DNI_4_5"
+    },
+    {
+      "id":"APM_DNI_6_7",
+      "type": "INFO",
+      "message": "APM_DNI_6_7"
+    },
+    {
+      "id":"APM_DNI_8_9",
+      "type": "INFO",
+      "message": "APM_DNI_8_9"
+    },
+    {
+      "id":"PU",
+      "type": "MENU",
+      "message": "Pago Único: Matrimonio, adopción y nacimiento.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0 y 1.", "templateId": "PU_DNI_0_1"},
+        { "value": "B", "message": "B. DNI Terminado en 2 y 3", "templateId": "PU_DNI_2_3"},
+        { "value": "C", "message": "C. DNI Terminado en 4 y 5.", "templateId": "PU_DNI_4_5"},
+        { "value": "D", "message": "D. DNI Terminado en 6 y 7.",  "templateId": "PU_DNI_6_7"},
+        { "value": "E", "message": "E. DNI Terminado en 8 y 9.", "templateId": "PU_DNI_8_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"PU_DNI_0_1",
+      "type": "INFO",
+      "message": "PU_DNI_0_1"
+    },
+    {
+      "id":"PU_DNI_2_3",
+      "type": "INFO",
+      "message": "PU_DNI_2_3"
+    },
+    {
+      "id":"PU_DNI_4_5",
+      "type": "INFO",
+      "message": "PU_DNI_4_5"
+    },
+    {
+      "id":"PU_DNI_6_7",
+      "type": "INFO",
+      "message": "PU_DNI_6_7"
+    },
+    {
+      "id":"PU_DNI_8_9",
+      "type": "INFO",
+      "message": "PU_DNI_8_9"
+    },
+    {
+      "id":"PNC",
+      "type": "MENU",
+      "message": "Pensiones NO Contributivas (PNC)",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0 y 1.", "templateId": "PNC_DNI_0_1"},
+        { "value": "B", "message": "B. DNI Terminado en 2 y 3", "templateId": "PNC_DNI_2_3"},
+        { "value": "C", "message": "C. DNI Terminado en 4 y 5.", "templateId": "PNC_DNI_4_5"},
+        { "value": "D", "message": "D. DNI Terminado en 6 y 7.",  "templateId": "PNC_DNI_6_7"},
+        { "value": "E", "message": "E. DNI Terminado en 8 y 9.", "templateId": "PNC_DNI_8_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"PNC_DNI_0_1",
+      "type": "INFO",
+      "message": "PNC_DNI_0_1"
+    },
+    {
+      "id":"PNC_DNI_2_3",
+      "type": "INFO",
+      "message": "PNC_DNI_2_3"
+    },
+    {
+      "id":"PNC_DNI_4_5",
+      "type": "INFO",
+      "message": "PNC_DNI_4_5"
+    },
+    {
+      "id":"PNC_DNI_6_7",
+      "type": "INFO",
+      "message": "PNC_DNI_6_7"
+    },
+    {
+      "id":"PNC_DNI_8_9",
+      "type": "INFO",
+      "message": "PNC_DNI_8_9"
+    },
+    {
+      "id":"APNC",
+      "type": "MENU",
+      "message": "Asignación Familiares de PNC.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0 y 1.", "templateId": "APNC_DNI_0_1"},
+        { "value": "B", "message": "B. DNI Terminado en 2 y 3", "templateId": "APNC_DNI_2_3"},
+        { "value": "C", "message": "C. DNI Terminado en 4 y 5.", "templateId": "APNC_DNI_4_5"},
+        { "value": "D", "message": "D. DNI Terminado en 6 y 7.",  "templateId": "APNC_DNI_6_7"},
+        { "value": "E", "message": "E. DNI Terminado en 8 y 9.", "templateId": "APNC_DNI_8_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"APNC_DNI_0_1",
+      "type": "INFO",
+      "message": "APNC_DNI_0_1"
+    },
+    {
+      "id":"APNC_DNI_2_3",
+      "type": "INFO",
+      "message": "APNC_DNI_2_3"
+    },
+    {
+      "id":"APNC_DNI_4_5",
+      "type": "INFO",
+      "message": "APNC_DNI_4_5"
+    },
+    {
+      "id":"APNC_DNI_6_7",
+      "type": "INFO",
+      "message": "APNC_DNI_6_7"
+    },
+    {
+      "id":"APNC_DNI_8_9",
+      "type": "INFO",
+      "message": "APNC_DNI_8_9"
+    },
+    {
+      "id":"DESEMPLEO",
+      "type": "MENU",
+      "message": "Desempleo.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0 y 1.", "templateId": "DESEMPLEO_DNI_0_1"},
+        { "value": "B", "message": "B. DNI Terminado en 2 y 3", "templateId": "DESEMPLEO_DNI_2_3"},
+        { "value": "C", "message": "C. DNI Terminado en 4 y 5.", "templateId": "DESEMPLEO_DNI_4_5"},
+        { "value": "D", "message": "D. DNI Terminado en 6 y 7.",  "templateId": "DESEMPLEO_DNI_6_7"},
+        { "value": "E", "message": "E. DNI Terminado en 8 y 9.", "templateId": "DESEMPLEO_DNI_8_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"DESEMPLEO_DNI_0_1",
+      "type": "INFO",
+      "message": "DESEMPLEO_DNI_0_1"
+    },
+    {
+      "id":"DESEMPLEO_DNI_2_3",
+      "type": "INFO",
+      "message": "DESEMPLEO_DNI_2_3"
+    },
+    {
+      "id":"DESEMPLEO_DNI_4_5",
+      "type": "INFO",
+      "message": "DESEMPLEO_DNI_4_5"
+    },
+    {
+      "id":"DESEMPLEO_DNI_6_7",
+      "type": "INFO",
+      "message": "DESEMPLEO_DNI_6_7"
+    },
+    {
+      "id":"DESEMPLEO_DNI_8_9",
+      "type": "INFO",
+      "message": "DESEMPLEO_DNI_8_9"
+    },
+    {
+      "id":"JUBILACIONES_PENSIONES",
+      "type": "MENU",
+      "message": "Jubilaciones y pensiones.",
+      "options" : [
+        { "value": "1", "message": "1 .- Haberes hasta 20.374 pesos.", "templateId": "HABERES_HASTA_20"},
+        { "value": "2", "message": "2 .- Haberes de más de 20.374 pesos.", "templateId": "HABERES_MAS_20"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },   
+    {
+      "id":"HABERES_HASTA_20",
+      "type": "MENU",
+      "message": "Haberes hasta 20.374 pesos.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0.", "templateId": "HABERES_HASTA_20_DNI_0"},
+        { "value": "B", "message": "B. DNI Terminado en 1", "templateId": "HABERES_HASTA_20_DNI_1"},
+        { "value": "C", "message": "C. DNI Terminado en 2.", "templateId": "HABERES_HASTA_20_DNI_2"},
+        { "value": "D", "message": "D. DNI Terminado en 3.",  "templateId": "HABERES_HASTA_20_DNI_3"},
+        { "value": "E", "message": "F. DNI Terminado en 4.", "templateId": "HABERES_HASTA_20_DNI_4"},
+        { "value": "F", "message": "G. DNI Terminado en 5.", "templateId": "HABERES_HASTA_20_DNI_5"},
+        { "value": "G", "message": "H. DNI Terminado en 6.", "templateId": "HABERES_HASTA_20_DNI_6"},
+        { "value": "H", "message": "I. DNI Terminado en 7.", "templateId": "HABERES_HASTA_20_DNI_7"},
+        { "value": "I", "message": "J. DNI Terminado en 8.", "templateId": "HABERES_HASTA_20_DNI_8"},
+        { "value": "J", "message": "K. DNI Terminado en 9.", "templateId": "HABERES_HASTA_20_DNI_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"HABERES_HASTA_20_DNI_0",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_0"
+    },
+    {
+      "id":"HABERES_HASTA_20_DNI_1",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_1"
+    },
+    {
+      "id":"HABERES_HASTA_20_DNI_2",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_2"
+    },
+    {
+      "id":"HABERES_HASTA_20_DNI_3",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_3"
+    },
+    {
+      "id":"HABERES_HASTA_20_DNI_4",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_4"
+    },
+    {
+      "id":"HABERES_HASTA_20_DNI_5",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_5"
+    },    {
+      "id":"HABERES_HASTA_20_DNI_6",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_6"
+    },    {
+      "id":"HABERES_HASTA_20_DNI_7",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_7"
+    },    {
+      "id":"HABERES_HASTA_20_DNI_8",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_8"
+    },    {
+      "id":"HABERES_HASTA_20_DNI_9",
+      "type": "INFO",
+      "message": "HABERES_HASTA_20_DNI_9"
+    },
+    {
+      "id":"HABERES_MAS_20",
+      "type": "MENU",
+      "message": "Haberes de más de 20.374 pesos.",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0 y 1.", "templateId": "HABERES_MAS_20_DNI_0_1"},
+        { "value": "B", "message": "B. DNI Terminado en 2 y 3", "templateId": "HABERES_MAS_20_DNI_2_3"},
+        { "value": "C", "message": "C. DNI Terminado en 4 y 5.", "templateId": "HABERES_MAS_20_DNI_4_5"},
+        { "value": "D", "message": "D. DNI Terminado en 6 y 7.",  "templateId": "HABERES_MAS_20_DNI_6_7"},
+        { "value": "E", "message": "E. DNI Terminado en 8 y 9.", "templateId": "HABERES_MAS_20_DNI_8_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"HABERES_MAS_20_DNI_0_1",
+      "type": "INFO",
+      "message": "HABERES_MAS_20_DNI_0_1"
+    },
+    {
+      "id":"HABERES_MAS_20_DNI_2_3",
+      "type": "INFO",
+      "message": "HABERES_MAS_20_DNI_2_3"
+    },
+    {
+      "id":"HABERES_MAS_20_DNI_4_5",
+      "type": "INFO",
+      "message": "HABERES_MAS_20_DNI_4_5"
+    },
+    {
+      "id":"HABERES_MAS_20_DNI_6_7",
+      "type": "INFO",
+      "message": "HABERES_MAS_20_DNI_6_7"
+    },
+    {
+      "id":"HABERES_MAS_20_DNI_8_9",
+      "type": "INFO",
+      "message": "HABERES_MAS_20_DNI_8_9"
+    },   
+    {
+      "id":"IFE",
+      "type": "MENU",
+      "message": "Ingreso Familiar de Emergencia (IFE).",
+      "options" : [
+        { "value": "A", "message": "A. DNI Terminado en 0.", "templateId": "IFE_DNI_0"},
+        { "value": "B", "message": "B. DNI Terminado en 1",  "templateId": "IFE_DNI_1"},
+        { "value": "C", "message": "C. DNI Terminado en 2.", "templateId": "IFE_DNI_2"},
+        { "value": "D", "message": "D. DNI Terminado en 3.", "templateId": "IFE_DNI_3"},
+        { "value": "E", "message": "F. DNI Terminado en 4.", "templateId": "IFE_DNI_4"},
+        { "value": "F", "message": "G. DNI Terminado en 5.", "templateId": "IFE_DNI_5"},
+        { "value": "G", "message": "H. DNI Terminado en 6.", "templateId": "IFE_DNI_6"},
+        { "value": "H", "message": "I. DNI Terminado en 7.", "templateId": "IFE_DNI_7"},
+        { "value": "I", "message": "J. DNI Terminado en 8.", "templateId": "IFE_DNI_8"},
+        { "value": "J", "message": "K. DNI Terminado en 9.", "templateId": "IFE_DNI_9"}
+      ],
+      "templateDefault" : {
+        "templateId": "DEFAULTMENUPRINCIPAL"
+      }
+    },
+    {
+      "id":"IFE_DNI_0",
+      "type": "INFO",
+      "message": "IFE_DNI_0"
+    },
+    {
+      "id":"IFE_DNI_1",
+      "type": "INFO",
+      "message": "IFE_DNI_1"
+    },
+    {
+      "id":"IFE_DNI_2",
+      "type": "INFO",
+      "message": "IFE_DNI_2"
+    },
+    {
+      "id":"IFE_DNI_3",
+      "type": "INFO",
+      "message": "IFE_DNI_3"
+    },
+    {
+      "id":"IFE_DNI_4",
+      "type": "INFO",
+      "message": "IFE_DNI_4"
+    },
+    {
+      "id":"IFE_DNI_5",
+      "type": "INFO",
+      "message": "IFE_DNI_5"
+    },    {
+      "id":"IFE_DNI_6",
+      "type": "INFO",
+      "message": "IFE_DNI_6"
+    },    {
+      "id":"IFE_DNI_7",
+      "type": "INFO",
+      "message": "IFE_DNI_7"
+    },    {
+      "id":"IFE_DNI_8",
+      "type": "INFO",
+      "message": "IFE_DNI_8"
+    },    {
+      "id":"IFE_DNI_9",
+      "type": "INFO",
+      "message": "IFE_DNI_9"
     }
   ]
 }
